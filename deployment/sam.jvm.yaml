@@ -1,0 +1,28 @@
+  AWSTemplateFormatVersion: '2010-09-09'
+  Transform: AWS::Serverless-2016-10-31
+  Description: AWS Serverless Quarkus - quarkus-workshop-2-1.0.0-SNAPSHOT
+  Globals:
+    Api:
+      EndpointConfiguration: REGIONAL
+      BinaryMediaTypes:
+        - "*/*"
+
+  Resources:
+    DynamoDbListenerFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: io.quarkus.funqy.lambda.FunqyStreamHandler::handleRequest
+        Runtime: java11
+        CodeUri: ../target/function.zip
+        MemorySize: 256
+        Timeout: 15
+        Policies:
+          - AWSLambdaBasicExecutionRole
+          - AWSLambdaDynamoDBExecutionRole
+        Events:
+          DynamoDBStream:
+            Type: DynamoDB
+            Properties:
+              BatchSize: 1
+              StartingPosition: TRIM_HORIZON
+              Stream: "arn:aws:dynamodb:eu-central-1:990213065435:table/dasniko-funqy-books/stream/2021-05-01T08:19:03.772"
