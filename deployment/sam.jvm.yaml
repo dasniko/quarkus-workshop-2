@@ -25,4 +25,4 @@
             Properties:
               BatchSize: 1
               StartingPosition: TRIM_HORIZON
-              Stream: "arn:aws:dynamodb:eu-central-1:990213065435:table/dasniko-funqy-books/stream/2021-05-01T08:19:03.772"
+              Stream: "arn:aws:dynamodb:eu-central-1:990213065435:table/dasniko-funqy-books/stream/2021-10-30T12:08:06.515"
